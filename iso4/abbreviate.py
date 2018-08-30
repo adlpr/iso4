@@ -10,11 +10,6 @@ WNL = WordNetLemmatizer()
 def abbreviate(title, periods=True, disambiguation_langs=set()):
     """
     Abbreviate title per ISO-4 / CIEPS LTWA.
-    Consider this KINDA HACKY; DO NOT TREAT AS 100% ACCURATE OR RELIABLE!
-    Improvements would include:
-    - stricter treatment of language in general
-    - better fuzzy matching with diacritics
-    - conversion from non-Latin scripts
 
     Inputs:
         (str) title
