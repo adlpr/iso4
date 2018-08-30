@@ -34,9 +34,13 @@ def abbreviate(title, periods=True, disambiguation_langs=set()):
     disambiguation_langs = set(disambiguation_langs)
 
     # split title either at space, or any words in mapping with spaces
-    title_words = filter(lambda w: w.strip(), TOKENIZER_REGEX.split(title))
+    title_words = list(filter(lambda w: w.strip(), TOKENIZER_REGEX.split(title)))
 
     result = []
+
+    # Exception for single-word titles
+    if len(title_words) == 1 and len(title_words[0].split(' ')) == 1:
+        return title
 
     for orig_word in title_words:
         # normalize and lemmatize
