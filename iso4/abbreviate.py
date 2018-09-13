@@ -9,7 +9,7 @@ WNL = WordNetLemmatizer()
 
 def abbreviate(title, periods=True, disambiguation_langs=set()):
     """
-    Abbreviate title per ISO-4 / CIEPS LTWA.
+    Abbreviate title per ISO 4 / CIEPS LTWA.
 
     Inputs:
         (str) title
@@ -216,7 +216,7 @@ def __initialize_ltwa():
         STOPWORDS = set([unicodedata.normalize('NFKD', line.strip()) for line in inf.readlines()])
 
     # Tokenizer regex from multi words
-    TOKENIZER_REGEX = re.compile("({}|\\s+)".format('|'.join(MULTI_WORD_TERMS)), flags=re.I)
+    TOKENIZER_REGEX = re.compile("({}|\\s+)".format('|'.join(["(?:^|\\s){}(?:\\s|$)".format(w) for w in MULTI_WORD_TERMS])), flags=re.I)
 
 
 def __get_type(word):
