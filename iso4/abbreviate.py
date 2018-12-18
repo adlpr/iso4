@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
-import os, csv, json, unicodedata, nltk
+import os, csv, json, unicodedata, string, nltk
 import regex as re
 from nltk.stem.wordnet import WordNetLemmatizer
 
@@ -133,7 +133,7 @@ def abbreviate(title, periods=True, disambiguation_langs=set()):
 
         result.append(word_abbr)
 
-    return ' '.join(result)
+    return unicodedata.normalize('NFKC', ' '.join(result))
 
 
 LTWA = {}
@@ -232,7 +232,7 @@ def __get_capitalization(word):
     if word == word.upper():
         return UPPERCASE
     elif word[0].isupper():
-        # if str.title() were used, this would return LOWERCASE for
+        # if titlecase were tested for, this would return LOWERCASE for
         # multiword exps not in full title case
         # e.g. "United states" --> "u. s."
         # so just force title case for anything starting with a capital
@@ -263,7 +263,7 @@ def __finalize_output(word, capitalization, periods):
         if capitalization == UPPERCASE:
             part = part.upper()
         elif capitalization == TITLECASE:
-            part = part.title()
+            part = string.capwords(part)
         if periods:
             part += '.'
         parts.append(part)

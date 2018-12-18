@@ -28,15 +28,6 @@ Exception: Ambiguous word in title: real; must disambiguate between langs: eng, 
 
 ## Notes
 
-* Known issues:
-  * Python's built-in `str.title()` treats NFKD'd strings badly, resulting in wonky capitalization on conversion:
-```python
->>> import unicodedata, iso4
->>> unicodedata.normalize('NFKD', "Bücherei des Orthopäden").title()
-'BüCherei Des OrthopäDen'
->>> iso4.abbreviate("Bücherei des Orthopäden")
-'BüCh. Orthop.'
-```
 * Potential future improvements:
   * stricter treatment of language in general
   * better fuzzy matching with diacritics
