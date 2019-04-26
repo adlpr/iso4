@@ -245,7 +245,7 @@ def __normalize_word(word):
     for part in word.split(' '):
         part = re.sub(r"(^\-|\p{P}+$)", '', part).strip()
         parts.append(unicodedata.normalize('NFKD', part.lower()))
-    return ' '.join(parts)
+    return ' '.join(parts).strip()
 
 def __normalize_abbr(abbr):
     """Strip hyphens, period, lower, normalize NFKD (if not "n.a.")."""
