@@ -26,6 +26,28 @@ Exception: Ambiguous word in title: real; must disambiguate between langs: eng, 
 'An. R. Acad. Farm.'
 ```
 
+## VIM Plugin
+
+A VIM plugin allows to abbreviate names directly from inside vim.
+
+### Install with Vundle
+
+The easiest way to install the plugin is via a vim plugin manager.
+I use [vundle](https://github.com/VundleVim/Vundle.vim)
+Then, just add the following to your `.vimrc` file.
+```
+Plugin  'adlpr/iso4'
+```
+Then run `:PluginInstall` from within VIM.
+
+### Use
+
+The following command will change the current line to its abbreviation
+```
+:ISO4
+```
+The command can also be used in visual mode.
+
 ## Notes
 
 * Potential future improvements:
