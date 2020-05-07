@@ -92,7 +92,7 @@ def _initialize_iso4_env(upgrade=False):
             str(_get_pip(virtualenv_path)),
             "install",
             "-U",
-            "/Users/JP27024/.vim/bundle/iso4",
+            "iso4",
         ]
         out = subprocess.run(command, capture_output=True)
         if out.returncode == 0:
