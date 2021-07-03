@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="iso4",  # Replace with your own username
-    version="0.0.1",
+    version="0.0.2",
     author="Alex DelPriore",
     author_email="delpriore@stanford.edu",
     description="ISO 4 abbreviation of publication titles in Python.",
@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/adlpr/iso4",
     packages=setuptools.find_packages(),
-    package_data={"": ["LTWA_20170914.json", "LTWA_20170914.tsv", "stopwords.txt"]},
+    package_data={"": ["LTWA_20170914.json", "LTWA_20170914.tsv", "stopwords.txt", "stopwords_keep_as_last.txt"]},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
