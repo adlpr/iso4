@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 
 import os, csv, json, unicodedata, string, nltk
 import regex as re
@@ -42,12 +42,13 @@ def abbreviate(title, periods=True, disambiguation_langs=set()):
     if len(title_words) == 1 and len(title_words[0].split(' ')) == 1:
         return title
 
-    for orig_word in title_words:
+    for iw, orig_word in enumerate(title_words):
         # normalize and lemmatize
         word_norm = __normalize_word(orig_word)
 
         # stopword, skip
-        if word_norm in STOPWORDS:
+        if word_norm in STOPWORDS and not (
+                iw == len(title_words)-1 and word_norm in KEEP_AS_LAST):
             continue
 
         # if normalized word fails, try lemma
@@ -142,6 +143,7 @@ LTWA_VERSION = "20170914"
 NOT_ABBREVIATED = "n.a."
 
 STOPWORDS = set([''])
+KEEP_AS_LAST = set([''])
 CONFLICT_MAP = {}
 MULTI_WORD_TERMS = []
 
@@ -154,7 +156,7 @@ LABEL_LTWA, LABEL_MULTIWORD, LABEL_CONFLICT = 'lmc'
 LOWERCASE, UPPERCASE, TITLECASE = 'lut'
 
 def __initialize_ltwa():
-    global LTWA, CONFLICT_MAP, MULTI_WORD_TERMS, STOPWORDS, TOKENIZER_REGEX
+    global LTWA, CONFLICT_MAP, MULTI_WORD_TERMS, STOPWORDS, KEEP_AS_LAST, TOKENIZER_REGEX
     json_filepath = os.path.join(os.path.dirname(__file__), "LTWA_{}.json".format(LTWA_VERSION))
     try:
         # Read JSON.
@@ -214,6 +216,10 @@ def __initialize_ltwa():
     sw_filepath = os.path.join(os.path.dirname(__file__), "stopwords.txt")
     with open(sw_filepath,'r') as inf:
         STOPWORDS = set([unicodedata.normalize('NFKD', line.strip()) for line in inf.readlines()])
+    # Set stopwords keep as last from txt
+    swkal_filepath = os.path.join(os.path.dirname(__file__), "stopwords_keep_as_last.txt")
+    with open(swkal_filepath,'r') as inf:
+        KEEP_AS_LAST = set([unicodedata.normalize('NFKD', line.strip()) for line in inf.readlines()])
 
     # Tokenizer regex from multi words
     TOKENIZER_REGEX = re.compile("({}|\\s+)".format('|'.join(["(?:^|\\s){}(?:\\s|$)".format(w) for w in MULTI_WORD_TERMS])), flags=re.I)
