@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/adlpr/iso4",
     packages=setuptools.find_packages(),
-    package_data={"": ["LTWA_20170914.json", "LTWA_20170914.tsv",
+    package_data={"": ["ltwa_20210702.json", "ltwa_20210702.tsv",
                        "stopwords.txt", "stopwords_keep_as_last.txt"]},
     classifiers=[
         "Programming Language :: Python :: 3",
